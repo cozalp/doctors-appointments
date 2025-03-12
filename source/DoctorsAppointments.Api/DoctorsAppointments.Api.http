@@ -1,0 +1,90 @@
+@DoctorsAppointments.Api_HostAddress = http://localhost:5261
+
+### Events Endpoints ###
+
+### Get All Events
+GET {{DoctorsAppointments.Api_HostAddress}}/api/events
+Accept: application/json
+
+### Get Events with Search and Paging
+GET {{DoctorsAppointments.Api_HostAddress}}/api/events?searchTerm=appointment&pageNumber=1&pageSize=10
+Accept: application/json
+
+### Get Events by Date Range
+GET {{DoctorsAppointments.Api_HostAddress}}/api/events?startDate=2025-03-12T00:00:00&endDate=2025-03-13T00:00:00&pageNumber=1&pageSize=10
+Accept: application/json
+
+### Get Event by ID
+GET {{DoctorsAppointments.Api_HostAddress}}/api/events/1
+Accept: application/json
+
+### Create New Event
+POST {{DoctorsAppointments.Api_HostAddress}}/api/events
+Content-Type: application/json
+
+{
+  "title": "Annual Checkup",
+  "description": "Regular annual health checkup",
+  "startTime": "2025-03-12T10:00:00",
+  "endTime": "2025-03-12T11:00:00",
+  "attendees": [
+    {
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "status": 1
+    }
+  ]
+}
+
+### Update Event
+PUT {{DoctorsAppointments.Api_HostAddress}}/api/events/1
+Content-Type: application/json
+
+{
+  "title": "Annual Checkup Updated",
+  "description": "Regular annual health checkup - Rescheduled",
+  "startTime": "2025-03-12T14:00:00",
+  "endTime": "2025-03-12T15:00:00"
+}
+
+### Delete Event
+DELETE {{DoctorsAppointments.Api_HostAddress}}/api/events/1
+
+### Check Time Slot Availability
+GET {{DoctorsAppointments.Api_HostAddress}}/api/events/availability?startTime=2025-03-12T10:00:00&endTime=2025-03-12T11:00:00
+Accept: application/json
+
+### Attendees Endpoints ###
+
+### Get Attendees by Event
+GET {{DoctorsAppointments.Api_HostAddress}}/api/attendees/event/1
+Accept: application/json
+
+### Get Attendee by ID
+GET {{DoctorsAppointments.Api_HostAddress}}/api/attendees/1
+Accept: application/json
+
+### Get Events by Attendee Email
+GET {{DoctorsAppointments.Api_HostAddress}}/api/attendees/email/john.doe@example.com/events
+Accept: application/json
+
+### Add Attendee to Event
+POST {{DoctorsAppointments.Api_HostAddress}}/api/attendees/event/1
+Content-Type: application/json
+
+{
+  "name": "Jane Smith",
+  "email": "jane.smith@example.com",
+  "status": 1
+}
+
+### Update Attendee Status
+PATCH {{DoctorsAppointments.Api_HostAddress}}/api/attendees/1/status
+Content-Type: application/json
+
+{
+  "status": 1
+}
+
+### Remove Attendee from Event
+DELETE {{DoctorsAppointments.Api_HostAddress}}/api/attendees/1
